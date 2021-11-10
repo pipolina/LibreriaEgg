@@ -16,12 +16,14 @@ public class LibroService {
 
     @Autowired
     private LibroRepository libroRepository;
-
-    private final AutorService as = new AutorService();
-    private final EditorialService es = new EditorialService();
+    
+    @Autowired
+    private AutorService as;
+    @Autowired
+    private EditorialService es;
 
     @Transactional
-    public void guardarLibro(Long isbn, String titulo, Integer anio, Integer ejemplares, String autor, String editorial) throws MiExcepcion {
+    public Libro guardarLibro(Long isbn, String titulo, Integer anio, Integer ejemplares, String autor, String editorial) throws MiExcepcion {
 //enel ejemplo de perro este metodo devuelve un perro
         Libro nuevoLibro = new Libro();
 
@@ -51,37 +53,37 @@ public class LibroService {
             nuevoLibro.setAlta(true);
         }
 
-        libroRepository.save(nuevoLibro);
+        return libroRepository.save(nuevoLibro);
     }
 
     @Transactional
-    public void alta(String id) throws MiExcepcion { //enel ejemplo de perro este metodo devuelve un perro
+    public Libro alta(String id) throws MiExcepcion { //enel ejemplo de perro este metodo devuelve un perro
         Optional<Libro> respuesta = libroRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Libro libro = respuesta.get();
             libro.setAlta(true);
-            libroRepository.save(libro);
+            return libroRepository.save(libro);
         } else {
             throw new MiExcepcion("No Existe este libro.");
         }
     }
 
     @Transactional
-    public void baja(String id) throws MiExcepcion { //enel ejemplo de perro este metodo devuelve un perro
+    public Libro baja(String id) throws MiExcepcion { //enel ejemplo de perro este metodo devuelve un perro
         Optional<Libro> respuesta = libroRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Libro libro = respuesta.get();
             libro.setAlta(false);
-            libroRepository.save(libro);
+            return libroRepository.save(libro);
         } else {
             throw new MiExcepcion("No Existe este libro.");
         }
     }
 
     @Transactional
-    public void modificarLibro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, String autor, String editorial) throws MiExcepcion {
+    public Libro modificarLibro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, String autor, String editorial) throws MiExcepcion {
 
         Optional<Libro> respuesta = libroRepository.findById(id);
 
@@ -114,7 +116,7 @@ public class LibroService {
             } else {
                 libro.setAlta(false);
             }
-            libroRepository.save(libro);
+            return libroRepository.save(libro);
         } else {
             throw new MiExcepcion("No se encuentra el libro seleccionado.");
         }

@@ -1,7 +1,9 @@
 package com.libreria.demo.controladores;
 
+import com.libreria.demo.entidades.Libro;
 import com.libreria.demo.excepciones.MiExcepcion;
 import com.libreria.demo.service.LibroService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +39,15 @@ public class LibroController {
             return "form-libro";
         }
         
+    }
+    
+    @GetMapping("/lista")
+    public String listaLibros(ModelMap modelo){
+        List<Libro> libros = libroService.listarLibros();
+        
+        modelo.addAttribute("libros", libros);
+        
+        return "list-libros";
     }
 
 }

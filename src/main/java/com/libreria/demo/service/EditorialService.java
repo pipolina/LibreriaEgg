@@ -22,9 +22,7 @@ public class EditorialService {
         nuevaEditorial.setNombre(editorial);
         nuevaEditorial.setAlta(true);
 
-        editorialRepository.save(nuevaEditorial);
-
-        return nuevaEditorial;
+        return editorialRepository.save(nuevaEditorial);
     }
 
     @Transactional(readOnly = true)
@@ -46,39 +44,39 @@ public class EditorialService {
     }
 
     @Transactional
-    public void alta(String id) throws MiExcepcion {
+    public Editorial alta(String id) throws MiExcepcion {
         Optional<Editorial> respuesta = editorialRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Editorial editorial = respuesta.get();
             editorial.setAlta(true);
-            editorialRepository.save(editorial);
+            return editorialRepository.save(editorial);
         } else {
             throw new MiExcepcion("No Existe este autor.");
         }
     }
 
     @Transactional
-    public void baja(String id) throws MiExcepcion {
+    public Editorial baja(String id) throws MiExcepcion {
         Optional<Editorial> respuesta = editorialRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Editorial editorial = respuesta.get();
             editorial.setAlta(false);
-            editorialRepository.save(editorial);
+            return editorialRepository.save(editorial);
         } else {
             throw new MiExcepcion("No Existe este autor.");
         }
     }
 
     @Transactional
-    public void modificar(String id, String nombreEditorial) throws MiExcepcion {
+    public Editorial modificar(String id, String nombreEditorial) throws MiExcepcion {
         Optional<Editorial> respuesta = editorialRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Editorial editorial = respuesta.get();
             editorial.setNombre(nombreEditorial);
-            editorialRepository.save(editorial);
+            return editorialRepository.save(editorial);
 
         } else {
             throw new MiExcepcion("No se encontro el autor que se desea modificar");

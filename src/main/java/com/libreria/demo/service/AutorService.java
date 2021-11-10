@@ -22,9 +22,7 @@ public class AutorService {
         nuevoAutor.setNombre(autor);
         nuevoAutor.setAlta(true);
 
-        autorRepository.save(nuevoAutor);
-
-        return nuevoAutor;
+        return autorRepository.save(nuevoAutor);
     }
 
     @Transactional(readOnly = true)
@@ -46,39 +44,39 @@ public class AutorService {
     }
 
     @Transactional
-    public void alta(String id) throws MiExcepcion {
+    public Autor alta(String id) throws MiExcepcion {
         Optional<Autor> respuesta = autorRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Autor autor = respuesta.get();
             autor.setAlta(true);
-            autorRepository.save(autor);
+            return autorRepository.save(autor);
         } else {
             throw new MiExcepcion("No Existe este autor.");
         }
     }
 
     @Transactional
-    public void baja(String id) throws MiExcepcion {
+    public Autor baja(String id) throws MiExcepcion {
         Optional<Autor> respuesta = autorRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Autor autor = respuesta.get();
             autor.setAlta(false);
-            autorRepository.save(autor);
+            return autorRepository.save(autor);
         } else {
             throw new MiExcepcion("No Existe este autor.");
         }
     }
 
     @Transactional
-    public void modificar(String id, String nombreAutor) throws MiExcepcion {
+    public Autor modificar(String id, String nombreAutor) throws MiExcepcion {
         Optional<Autor> respuesta = autorRepository.findById(id);
 
         if (respuesta.isPresent()) {
             Autor autor = respuesta.get();
             autor.setNombre(nombreAutor);
-            autorRepository.save(autor);
+            return autorRepository.save(autor);
 
         } else {
             throw new MiExcepcion("No se encontro el autor que se desea modificar");
