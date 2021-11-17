@@ -30,6 +30,7 @@ public class AutorService {
         return autorRepository.buscarAutorPorNombre(autor);
     }
 
+    @Transactional
     public Autor buscarAutorPorId(String id) throws MiExcepcion {
 
         Optional<Autor> respuesta = autorRepository.findById(id);

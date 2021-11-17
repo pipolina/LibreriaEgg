@@ -30,6 +30,7 @@ public class EditorialService {
         return editorialRepository.buscarEditorialPorNombre(autor);
     }
 
+    @Transactional
     public Editorial buscarEditorialPorId(String id) throws MiExcepcion {
 
         Optional<Editorial> respuesta = editorialRepository.findById(id);
