@@ -16,7 +16,7 @@
 				<tr>
 					<th scope="col">id</th>
 					<th scope="col">Nombre</th>
-					<th scope="col">Lista de Autores</th> 
+					<th scope="col">Libros</th> 
 					<th scope="col">Esta activo?</th>
 				</tr>
 			</thead>
@@ -24,7 +24,7 @@
 				<tr>
 					<th scope="row" th:text="${autor.id}"></th>
 					<td th:text="${autor.nombre}"></td>
-					<!--<td th:text="${libro.titulo}"></td> <!--aca me gustaria poner un boton a la lista de libros de este autor-->
+					<td> <input hidden th:value="${autor.id}" name="id"><a th:href="@{/autor/libro/lista/__${autor.id}__}" class="btn btn-outline-info">Libros</a></td> <!--aca me gustaria poner un boton a la lista de libros de este autor-->
 					<td>
 						<i th:if="${autor.alta}" class="fa fa-circle text-success"></i>
 						<i th:unless="${autor.alta}" class="fa fa-circle" style="color:red;"></i>

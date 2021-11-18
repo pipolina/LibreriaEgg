@@ -127,6 +127,11 @@ public class LibroService {
     public List<Libro> listarLibros() {
         return libroRepository.findAll();
     }
+    
+     @Transactional(readOnly = true)
+    public List<Libro> listarLibrosPorAutor(String id) {
+        return libroRepository.buscarLibroPorAutor(id);
+    }
 
     @Transactional(readOnly = true)
     public List<Libro> listarActivos() {
