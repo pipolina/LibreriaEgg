@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+    <title>Modificar un Libro</title>
+</head>
+
+<body>
+    <div class="modif-libro">
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Exito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+        <form th:action="@{/libro/modificar}" method="POST">
+            <input hidden th:value="${libro.id}" name="id">
+            <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input type="text" class="form-control" th:value="${libro.isbn}" id="isbn" name="isbn" placeholder="ISBN">
+            </div>
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" th:value="${libro.titulo}" id="titulo" name="titulo" placeholder="Titulo del Libro">
+            </div>
+            <div class="form-group">
+                <label for="anio">Año</label>
+                <input type="number" class="form-control" th:value="${libro.anio}" id="anio" name="anio" placeholder="Año">
+            </div>
+            <div class="form-group">
+                <label for="ejemplares">Ejemplares</label>
+                <input type="number" class="form-control" th:value="${libro.ejemplares}" id="ejemplares" name="ejemplares"
+                    placeholder="Cantidad de ejemplares">
+            </div>
+            <div class="form-group">
+                <label for="autor">Autor</label>
+                <input type="text" class="form-control" th:value="${libro.autor.nombre}" id="autor" name="autor" placeholder="Nombre del Autor">
+            </div>
+            <div class="form-group">
+                <label for="editorial">Editorial</label>
+                <input type="text" class="form-control" th:value="${libro.editorial.nombre}" id="editorial" name="editorial"
+                    placeholder="Nombre de la Editorial">
+            </div>
+            <button type="submit" class="btn btn-primary">Modificar</button>
+        </form>
+    </div>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <a th:href="@{/}" class="btn btn-primary my-2">Volver</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -23,7 +23,7 @@
 				<tr>
 					<th scope="row" th:text="${editorial.id}"></th>
 					<td th:text="${editorial.nombre}"></td>
-					<!--<td th:text="${libro.titulo}"></td> <!--aca me gustaria poner un boton a la lista de libros de este autor-->
+					<td> <input hidden th:value="${editorial.id}" name="id"><a th:href="@{/editorial/libro/lista/__${editorial.id}__}" class="btn btn-outline-info">Libros</a></td> <!--aca me gustaria poner un boton a la lista de libros de este autor-->
 					<td>
 						<i th:if="${editorial.alta}" class="fa fa-circle text-success"></i>
 						<i th:unless="${editorial.alta}" class="fa fa-circle" style="color:red;"></i>

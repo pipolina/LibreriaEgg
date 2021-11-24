@@ -63,7 +63,7 @@ public class LibroController {
         }
     }
 
-       @GetMapping("/baja/{id}")
+    @GetMapping("/baja/{id}")
     public String bajaLibro(@PathVariable String id) throws MiExcepcion {
 
         try {
@@ -74,5 +74,29 @@ public class LibroController {
             return "redirect:/";
         }
     }
-    
+
+    @GetMapping("/modificar/{id}")
+    public String modificarLibro(@PathVariable String id, ModelMap modelo) {
+        Libro libro = libroService.buscarLibroPorId(id);
+        modelo.addAttribute("libro", libro);
+        return "modif-libro";
+    }
+
+    @PostMapping("/modificar")
+    public String modificarLibro(ModelMap modelo, String id, @RequestParam Long isbn, @RequestParam String titulo, @RequestParam Integer anio, @RequestParam Integer ejemplares, @RequestParam String autor, @RequestParam String editorial) throws MiExcepcion {
+
+        try {
+            libroService.modificarLibro(id, isbn, titulo, anio, ejemplares, autor, editorial);
+
+            modelo.put("exito", "Libro modificado con Éxito");
+            return "modif-libro";
+
+        } catch (Exception e) {
+
+            modelo.put("error", "Hubo un error al modificar el libro");
+            return "modif-libro";
+        }
+
+    }
+
 }
