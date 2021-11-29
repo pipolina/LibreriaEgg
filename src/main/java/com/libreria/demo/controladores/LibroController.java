@@ -88,15 +88,37 @@ public class LibroController {
         try {
             libroService.modificarLibro(id, isbn, titulo, anio, ejemplares, autor, editorial);
 
-            modelo.put("exito", "Libro modificado con Éxito");
-            return "modif-libro";
+            List<Libro> libros = libroService.listarLibros();
+            modelo.addAttribute("libros", libros);
 
-        } catch (Exception e) {
+            modelo.put("exito", "Libro modificado con Éxito");
+            return "list-libros";
+
+        } catch (MiExcepcion e) {
+
+            List<Libro> libros = libroService.listarLibros();
+            modelo.addAttribute("libros", libros);
 
             modelo.put("error", "Hubo un error al modificar el libro");
-            return "modif-libro";
+            return "list-libros";
         }
 
+//        try {
+//            libroService.modificarLibro(id, isbn, titulo, anio, ejemplares, autor, editorial);
+//
+//            Libro libro = libroService.buscarLibroPorId(id);
+//            modelo.addAttribute("libro", libro);
+//            modelo.put("exito", "Libro modificado con Éxito");
+//            return "modif-libro";
+//
+//        } catch (Exception e) {
+//
+//            Libro libro = libroService.buscarLibroPorId(id);
+//            modelo.addAttribute("libro", libro);
+//            modelo.put("error", "Hubo un error al modificar el libro");
+//            return "modif-libro";
+//
+//    }
     }
 
 }

@@ -28,7 +28,7 @@
             </div>
         </div>
         <form th:action="@{/libro/modificar}" method="POST">
-            <input hidden th:value="${libro.id}" name="id">
+            <input hidden th:value="${libro.id}" name="id">r
             <div class="form-group">
                 <label for="isbn">ISBN</label>
                 <input type="text" class="form-control" th:value="${libro.isbn}" id="isbn" name="isbn" placeholder="ISBN">
